@@ -12,12 +12,13 @@ class TamarinProver < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "c8fb1f445c9973a62376dd16ff711e019a00e0df3fb71d2b9afefa26fecc8ffe"
   end
 
-  #depends_on "haskell-stack" => :build
+  depends_on "haskell-stack" => :build
   depends_on "zlib" => :build unless OS.mac?
   depends_on "ocaml" => :build
   depends_on "graphviz"
   depends_on macos: :yosemite
   depends_on "kahiroka/tap/maude"
+  depends_on "ghc" => :build
 
   # doi "10.1109/CSF.2012.25"
   # tag "security"
