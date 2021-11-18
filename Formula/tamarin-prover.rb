@@ -30,7 +30,8 @@ class TamarinProver < Formula
     unless OS.mac?
       args << "--extra-include-dirs=#{Formula["zlib"].include}" << "--extra-lib-dirs=#{Formula["zlib"].lib}"
     end
-    system "/opt/homebrew/bin/stack", "-j#{jobs}", *args, "install", "--flag", "tamarin-prover:threaded"
+    ENV["PATH"] = "/opt/homebrew/bin:" + ENV["PATH"]
+    system "stack", "-j#{jobs}", *args, "install", "--flag", "tamarin-prover:threaded"
 
     # `ocaml` building under linuxbrew needs to be single core.
     ENV.deparallelize
