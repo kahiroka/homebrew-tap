@@ -1,8 +1,8 @@
 class Maude < Formula
   desc "Reflective language for equational and rewriting logic specification"
   homepage "http://maude.cs.illinois.edu"
-  url "http://maude.cs.illinois.edu/w/images/d/d8/Maude-2.7.1.tar.gz"
-  sha256 "b1887c7fa75e85a1526467727242f77b5ec7cd6a5dfa4ceb686b6f545bb1534b"
+  url "http://maude.cs.illinois.edu/w/images/d/d3/Maude-3.1.tar.gz"
+  sha256 "b112d7843f65217e3b5a9d40461698ef8dab7cbbe830af21216dfb924dc88a2f"
   revision 1
 
   bottle do
@@ -18,11 +18,12 @@ class Maude < Formula
   end
 
   depends_on "gmp"
-  depends_on "libbuddy"
+  depends_on "kahiroka/tap/libbuddy"
   depends_on "libsigsegv"
   depends_on "libtecla"
   depends_on "flex" unless OS.mac?
-  depends_on "bison" unless OS.mac?
+  depends_on "bison"
+  depends_on "SRI-CSL/sri-csl/yices2"
 
   def install
     ENV.deparallelize
@@ -30,7 +31,8 @@ class Maude < Formula
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{libexec}",
-                          "--without-cvc4"
+                          "--without-cvc4",
+                          "BISON=/opt/homebrew/opt/bison/bin/bison"
     system "make", "install"
     (bin/"maude").write_env_script libexec/"bin/maude", MAUDE_LIB: libexec/"share"
   end

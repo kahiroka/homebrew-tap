@@ -16,7 +16,8 @@ class Libbuddy < Formula
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
                           "--disable-silent-rules",
-                          "--prefix=#{prefix}"
+                          "--prefix=#{prefix}",
+                          "--build=arm64-unknown-darwin"
     system "make", "install"
   end
 
