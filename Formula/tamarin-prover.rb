@@ -25,8 +25,8 @@ class TamarinProver < Formula
   def install
     # Let `stack` handle its own parallelization
     jobs = ENV.make_jobs
-    system "stack", "-j#{jobs}", "setup", "ghc-8.10.7"
-    args = []
+    #system "stack", "-j#{jobs}", "setup", "ghc-8.10.7"
+    args = ["--system-ghc", "--skip-ghc-check"]
     unless OS.mac?
       args << "--extra-include-dirs=#{Formula["zlib"].include}" << "--extra-lib-dirs=#{Formula["zlib"].lib}"
     end
